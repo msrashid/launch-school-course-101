@@ -1,0 +1,38 @@
+en:
+ adding: 'Adding the two numbers'
+ sub: 'Subtracting the two numbers'
+ multiple: 'Multiplying the two numbers'
+ divide: 'Dividing the two numbers'
+ must: "Must choose 1, 2, 3 or 4\n"
+ welcome: "Welcome to Calculator! Enter your name:"
+ name: "Make sure to end a valid name."
+ first: 'What is the first number?'
+ second: 'What is the second number?'
+ hmm: "Hmm...that doesn't look like a valid number"
+ again: "Do you want to perform the operation again? Y to calculate again?"
+ thanks: "Thank you for using the calculator! Goodbye!"
+ operator_prompt: | 
+  What operation would you like to perform? 
+  1) add 
+  2) subtract 
+  3) multiple
+  4) divide
+es:
+ adding: 'La adición de los dos números'  
+ sub: 'Restando los dos números'
+ multiple: 'Multiplicando los dos números'
+ divide: 'La división de los dos números'
+ must: "Debe elegir 1, 2, 3 o 4 \ n"
+ welcome: "Bienvenido a la calculadora. Introduzca su nombre:"
+ name: "Asegúrese de poner fin a un nombre válido."
+ first: '¿Cuál es el primer número?'
+ second: '¿Cuál es el segundo número?'
+ hmm: "Hmm ... que no se ve como un número válido"
+ again: "¿Desea realizar la operación de nuevo Y para calcular de nuevo?"
+ thanks: "Gracias por utilizar la calculadora Adiós! \ n!"
+ operator_prompt: | 
+  ¿Qué operación desea realizar?
+  1) añadir
+  2) de resta
+  3) múltiple
+  4) se dividen
