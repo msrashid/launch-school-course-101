@@ -85,7 +85,7 @@ until value == true
   elsif t.to_i == 0
     puts "Enter 'M' or 'Y'"
     t = gets.chomp
-  else 
+  else
     puts "Enter 'M' or 'Y'"
     t = gets.chomp
   end
