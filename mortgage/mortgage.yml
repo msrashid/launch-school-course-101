@@ -1,0 +1,32 @@
+en:
+  welcome: 'Welcome to the mortgage calculator! What is your name?'
+  amount: "What is the Loan Amount?"
+  rate: >  
+   What is the Annual Percentage Rate (APR). Enter a number between 1 and 100:
+  duration: "What is the Loan Duration?"
+  time: "Is the Loan Duration in months or years? M or Y"
+  payment: "The monthly payment is as follows:"
+  valid: "Please enter a valid number or rate."
+  validname: "Please enter a valid name"
+  remaining: "Do you want to check the remaining balance? Y or N"
+  months: "How many months has passed by?"
+  balance: "The remaining balance is:"
+  total: "The remaining amount of monthly payments is approximately:"
+  thanks: "Thanks for using this mortgage calculator Have a good day!"
+  minterest: "The monthly interest rate is:"
+es:
+  welcome: 'Bienvenido a la calculadora de hipotecas! ¿Cuál es su nombre?'
+  amount: "¿Cuál es el monto del préstamo?"
+  rate: >  
+   ¿Cuál es la tasa de porcentaje anual (APR). Introduzca un número entre 1 y 100:
+  duration: "¿Cuál es la duración del préstamo?"
+  time: "¿Es la duración del préstamo en meses o años M o Y?"
+  payment: "El pago mensual es el siguiente:"
+  valid: "Por favor, introduzca un número o tipo válido."
+  validname: "Por favor, introduzca un nombre válido"
+  remaining: "¿Quieres comprobar el saldo restante S o N"
+  months: "¿Cuántos meses ha pasado por?"
+  balance: "El saldo restante es:"
+  total: "El resto del importe de los pagos mensuales es de aproximadamente:"
+  thanks: "Gracias por el uso de esta calculadora de hipotecas tuvo un buen día!"
+  minterest: "La tasa de interés mensual es:"
