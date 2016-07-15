@@ -1,119 +1,61 @@
 require 'yaml'
 MG = YAML.load_file('mortgage.yml')
-LANGUAGE = 'en'
-def language(line, lang = 'en')
-  MG[lang][line]
+
+amount = "To Be Determined"
+duration = "To Be Determined"
+rate = "To Be Determined"
+
+# print format
+def read(x)
+  read = MG["en"][x]
+  puts "=> #{read}"
 end
 
-def print(x)
-  out = language(x, LANGUAGE)
-  puts "=> #{out}"
-end
-
+# valid number (0 and above)
 def valid_number?(x)
-  if x.to_s =~ /0/ && x.to_i >= 0
-    return true
-  elsif x.to_i == 0
-  elsif x.to_f >= 0
-    return true
+  if !(x =~ /[a-zA-Z]/) && x =~ /0/ && x.to_f == 0
+    false
+  elsif x.to_f >= 1 && !(x =~ /[a-zA-Z]/)
+    true
   else
-    print("valid")
+    false
   end
 end
 
-def valid_zero?(x)
-  if x.to_s =~ /0/
-    x.to_f <= 100 && x.to_f >= 0 ? (return true) : (return false)
-  end
-end
+# welcome
+read("welcome")
 
-def valid_rate?(x)
-  if valid_zero?(x) == true
-    return true
-  elsif x.to_i == 0
-    print("valid")
-  elsif x.to_f <= 100 && x.to_f >= 0
-    return true
-  else
-    print("valid")
-  end
-end
-
-def input(method)
-  value = false
-  variable = 1
-  until value == true
-    variable = gets.chomp.delete(",")
-    value = method.call(variable)
-  end
-  variable
-end
-print("welcome")
-j = 1
-until j == 0
-  name = gets.chomp
-  if name.empty?
-    print("validname")
-  else
-    puts "=> Welcome #{name}!"
-    j = 0
-  end
-end
 # amount
-print("amount")
-amount = input(method(:valid_number?)).to_f
-# rate
-print("rate")
-rate = input(method(:valid_rate?)).to_f
-print("minterest")
-puts "#{(rate.to_f / 1200).round(6)}%"
+loop do
+  read("amount")
+  amount = gets.chomp.delete("$")
+  break if valid_number?(amount) ? true : read("valid")
+end
+
 # duration
-print("duration")
-duration = input(method(:valid_number?)).to_f
-# months or years
-print("time")
-t = gets.chomp
-value = false
-until value == true
-  if t.downcase.start_with?('m')
-    t = "M"
-    value = true
-  elsif t.downcase.start_with?('y')
-    t = "Y"
-    duration *= 12
-    value = true
-  elsif t.to_i == 0
-    puts "Enter 'M' or 'Y'"
-    t = gets.chomp
-  else
-    puts "Enter 'M' or 'Y'"
-    t = gets.chomp
-  end
+loop do
+  read("duration")
+  duration = gets.chomp
+  break if valid_number?(duration) ? true : read("valid")
 end
+
+# rate
+loop do
+  read("rate")
+  rate = gets.chomp
+  valid_rate = valid_number?(rate) && rate.to_f < 100
+  break if valid_rate ? true : read("valid")
+end
+
+amount = amount.to_f
+duration = duration.to_f * 12
+adjusted_rate = (rate.to_f / 1200)
+
 # monthly payment
-c = (rate.to_f / 1200)
-l = ((amount * (c * ((1 + c)**duration))) / ((1 + c)**duration - 1)).round(0)
-print("payment")
-puts "$#{l}"
-# remaining payment
-print("remaining")
-r = gets.chomp
-value = false
-until value == true
-  if r.downcase.start_with?('y')
-    print("months")
-    p = input(method(:valid_number?)).to_f
-    value = true
-  elsif r.downcase.start_with?('n')
-    break
-  else
-    puts "Enter 'Y' or 'N'"
-  end
-end
-b = l * (duration - p)
-string = duration - p
-print("total")
-puts string.to_s
-print("balance")
-puts "$#{b.round(0)}"
+payment = ((amount * (adjusted_rate * ((1 + adjusted_rate)**duration))) /
+                  ((1 + adjusted_rate)**duration - 1))
+read("payment")
+puts "$#{payment.round(2)}"
+
+# goodbye
 print("thanks")
