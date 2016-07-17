@@ -29,9 +29,7 @@ loop do
     true_false
   end
 
-  win_logic?("r", "s")
-  win_logic?("s", "r")
-
+  # determining inputs for user and computer
   computer_option = options.keys.sample
   loop do
     puts MESSAGE['Welcome']
