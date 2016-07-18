@@ -1,6 +1,6 @@
 Welcome: |
     ---------------------------------------------
-    => "Welcome to Rock Paper Scissors Lizard Spock!
+    => Welcome to Rock Paper Scissors Lizard Spock!
        Select one of the following options:
        r) for "rock"
        p) for "paper"
@@ -8,4 +8,4 @@ Welcome: |
        sp) for "spock"
        l) for "lizard"
 
-       First player to score 5 points wins!"
+       First player to score 5 points wins!
