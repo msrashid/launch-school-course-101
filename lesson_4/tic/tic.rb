@@ -6,6 +6,7 @@ tie = 0
 computer_won = nil
 win_formula = [[1, 2, 3], [1, 4, 7], [1, 5, 9], [5, 4, 6], [5, 2, 8],
                [5, 3, 7], [5, 1, 9], [9, 7, 8], [9, 3, 6], [9, 1, 5]]
+
 # Is the value read in a valid number between 1-9?
 def valid_number?(number, possible_values)
   number <= 9 && number >= 1 && possible_values.include?(number.to_i)
@@ -111,14 +112,17 @@ loop do
   computer_array = []
   possible_values = []
   display_marks = {}
+
   (1..9).each do |value|
     display_marks[value.to_i] = value.to_s
     possible_values += [value]
   end
+
   display_board(display_marks, "no")
   prompt("Welcome")
   prompt("Whofirst?")
   who_is_first = gets.chomp
+
   loop do
     if who_is_first.casecmp("y") == 0
       player_move(possible_values, player_array, display_marks)
@@ -132,6 +136,7 @@ loop do
         player_move(possible_values, player_array, display_marks)
       end
     end
+
     display_board(display_marks)
     # Who Won?
     if winner?(player_array, win_formula)
@@ -148,6 +153,7 @@ loop do
       break
     end
   end
+
   system 'clear'
   display_board(display_marks, "no")
   score = <<-SCORE
@@ -165,6 +171,7 @@ loop do
 
 
              SCORE
+
   puts score # Tallying up the score
   next unless player_win == 5 || computer_win == 5
   player_win = 0
