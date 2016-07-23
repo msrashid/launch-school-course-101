@@ -1,0 +1,19 @@
+Welcome: |
+
+       _______________________________________________
+       
+       Welcome to Tic Tac Toe!
+       First player to have three in a row wins the round!
+       First player to score five points wins the game!
+       _______________________________________________
+
+
+First: "=> Choose a position to place a piece:"
+Invalid: "Invalid input."
+Win: "Congratulations! You have won!"
+Loss: "Computer Wins!"
+Again: "Draw."
+Play: "Play Again? Enter N to stop, any other key to continue."
+Whofirst?: "First Turn?: Type Y for Player any other key for Computer."
+Playermove: "Player Move:"
+Computermove: "Computer Move"
