@@ -1,11 +1,8 @@
+require "pry"
 require 'yaml'
 MESSAGE = YAML.load_file("tick.yml")
-player_win = 0
-computer_win = 0
-tie = 0
-computer_won = nil
-win_formula = [[1, 2, 3], [1, 4, 7], [1, 5, 9], [5, 4, 6], [5, 2, 8],
-               [5, 3, 7], [5, 1, 9], [9, 7, 8], [9, 3, 6], [9, 1, 5]]
+WIN_FORMULA = [[1, 2, 3], [1, 4, 7], [1, 5, 9], [5, 4, 6], [5, 2, 8],
+               [5, 3, 7], [5, 1, 9], [9, 7, 8], [9, 3, 6], [9, 1, 5]].freeze
 
 # Is the value read in a valid number between 1-9?
 def valid_number?(number, possible_values)
@@ -33,9 +30,9 @@ _____|_____|_____
 end
 
 # Is there a winner?
-def winner?(user_inputs, win_formula)
+def winner?(user_inputs)
   # Does the user have any of the winning values?
-  win_formula.each do |values|
+  WIN_FORMULA.each do |values|
     return true if user_inputs.include?(values[0]) &&
                    user_inputs.include?(values[1]) &&
                    user_inputs.include?(values[2])
@@ -44,9 +41,9 @@ def winner?(user_inputs, win_formula)
 end
 
 # Should computer go for the win or save itself?
-def computer_win_or_save(array, win_formula, possible_values)
-  win_formula.each do |win_formula_iteration|
-    win_value = win_formula_iteration - array
+def computer_win_or_save(array, possible_values)
+  WIN_FORMULA.each do |win_formula_line|
+    win_value = win_formula_line - array
     next if win_value.size > 1
     return win_value[0] if possible_values.include?(win_value[0])
   end
@@ -54,10 +51,9 @@ def computer_win_or_save(array, win_formula, possible_values)
 end
 
 # What is the best move for computer?
-def best_move_for_computer(player_array, computer_array,
-                           win_formula, possible_values)
-  defend = computer_win_or_save(player_array, win_formula, possible_values)
-  attack = computer_win_or_save(computer_array, win_formula, possible_values)
+def best_move_for_computer(player_array, computer_array, possible_values)
+  defend = computer_win_or_save(player_array, possible_values)
+  attack = computer_win_or_save(computer_array, possible_values)
   if attack
     attack
   elsif defend
@@ -87,15 +83,15 @@ def player_move(possible_values, player_array, display_marks)
 end
 
 # Calling methods for the best move and recording it in an array.
-def computer_move(possible_values, win_formula, display_marks,
+def computer_move(possible_values, display_marks,
                   computer_array = [], player_array = [])
   computer_value = best_move_for_computer(player_array, computer_array,
-                                          win_formula, possible_values)
+                                          possible_values)
   possible_values.delete(computer_value)
   computer_array.push(computer_value)
   prompt("Computermove")
   display_marks[computer_value] = "O"
-  winner?(computer_array, win_formula)
+  winner?(computer_array)
 end
 
 # The "or" extra challenge
@@ -106,30 +102,36 @@ def joiner(array_inputs)
   new_array_input
 end
 
+player_score = 0
+computer_score = 0
+tie = 0
+computer_won = nil
+prompt("Welcome")
+prompt("Whofirst?")
 # The main program .
 loop do
   player_array = []
   computer_array = []
   possible_values = []
   display_marks = {}
-
+  initial_display_marks = {}
+  
   (1..9).each do |value|
-    display_marks[value.to_i] = value.to_s
+    display_marks[value.to_i] = " "
     possible_values += [value]
+    initial_display_marks[value.to_i] = value
   end
 
-  display_board(display_marks, "no")
-  prompt("Welcome")
-  prompt("Whofirst?")
-  who_is_first = gets.chomp
+  display_board(initial_display_marks, "no")
+  first_turn_input = gets.chomp
 
   loop do
-    if who_is_first.casecmp("y") == 0
+    if first_turn_input.casecmp("y") == 0
       player_move(possible_values, player_array, display_marks)
-      computer_won = computer_move(possible_values, win_formula, display_marks,
+      computer_won = computer_move(possible_values, display_marks,
                                    computer_array,  player_array)
     else
-      computer_won = computer_move(possible_values, win_formula, display_marks,
+      computer_won = computer_move(possible_values, display_marks,
                                    computer_array, player_array)
       display_board(display_marks)
       unless computer_won || possible_values.empty?
@@ -139,13 +141,13 @@ loop do
 
     display_board(display_marks)
     # Who Won?
-    if winner?(player_array, win_formula)
-      player_win += 1
-      prompt("Win") if player_win == 5
+    if winner?(player_array)
+      player_score += 1
+      prompt("Win") if player_score == 5
       break
     elsif computer_won
-      computer_win += 1
-      prompt("Loss") if computer_win == 5
+      computer_score += 1
+      prompt("Loss") if computer_score == 5
       break
     elsif possible_values.empty?
       prompt("Again")
@@ -163,8 +165,8 @@ loop do
 |_____________________________________|
 |    User        | Score              |
 |    ---------------------            |
-|    Player      | #{player_win}                  |
-|    Computer    | #{computer_win}                  |
+|    Player      | #{player_score}                  |
+|    Computer    | #{computer_score}                  |
 |    Tie         | #{tie}                  |
 |_____________________________________|
 |_____________________________________|
@@ -173,11 +175,15 @@ loop do
              SCORE
 
   puts score # Tallying up the score
-  next unless player_win == 5 || computer_win == 5
-  player_win = 0
-  computer_win = 0
+  prompt("Whofirst?") if !(player_score == 5 || computer_score == 5)
+  binding.pry
+  next unless player_score == 5 || computer_score == 5
+  player_score = 0
+  computer_score = 0
   prompt("Play")
   puts
   play = gets.chomp.to_s
   break if play.casecmp("n") == 0 # Play again
+  prompt("Welcome")
+  prompt("Whofirst?")
 end
