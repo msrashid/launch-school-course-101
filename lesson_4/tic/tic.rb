@@ -4,7 +4,7 @@ MESSAGE = YAML.load_file("tick.yml")
 WIN_FORMULA = [[1, 2, 3], [1, 4, 7], [1, 5, 9], [5, 4, 6], [5, 2, 8],
                [5, 3, 7], [5, 1, 9], [9, 7, 8], [9, 3, 6], [9, 1, 5]].freeze
 
-# Is the value read in a valid number between 1-9?
+# Is the value read in a valid number between 1-9 ?
 def valid_number?(number, possible_values)
   number <= 9 && number >= 1 && possible_values.include?(number.to_i)
 end
