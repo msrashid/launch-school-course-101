@@ -1,0 +1,17 @@
+welcome: | 
+  ----------------------------------------------------------------------------
+
+                          Welcome to Blackjack
+
+  1. First player to win 5 rounds wins the game.
+  2. If player scores 21 and computer doesn't. Then player wins the round. 
+     The opposite is true as well.
+  3. If the result is a tie then no points are awarded.
+  4. If neither player or computer hits Blackjack, the higher hand wins the round.
+  5. If you would like to change the Blackjack score, please type "change".
+     Press any other key to continue as default. Bear in mind that this
+     will be the winning score for 5 straight rounds.
+
+     Have Fun!
+
+    ----------------------------------------------------------------------------

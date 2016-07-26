@@ -124,7 +124,7 @@ loop do
 
   display_board(initial_display_marks, "no")
   first_turn_input = gets.chomp
-
+ 
   loop do
     if first_turn_input.casecmp("y") == 0
       player_move(possible_values, player_array, display_marks)
