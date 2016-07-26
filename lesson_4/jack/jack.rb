@@ -94,7 +94,7 @@ loop do
   end
 
   loop do
-    # New round and refresh.
+    # New round and refresh
     system 'clear'
     player_sum = 0
     computer_sum = 0
